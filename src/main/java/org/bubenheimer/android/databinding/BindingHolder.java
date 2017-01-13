@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015-2016 Uli Bubenheimer.
+ * Copyright (c) 2015-2017 Uli Bubenheimer
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,7 +12,6 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
  */
 
 package org.bubenheimer.android.databinding;
@@ -33,10 +32,14 @@ public class BindingHolder<T extends ViewDataBinding> extends RecyclerView.ViewH
         this.binding = binding;
     }
 
-    public static <T extends ViewDataBinding> BindingHolder<T>
-    create(final ViewGroup parent, final @LayoutRes int layoutId) {
-        final T binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()),
+    public static <T extends ViewDataBinding> T inflate(
+            final ViewGroup parent, final @LayoutRes int layoutId) {
+        return DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()),
                 layoutId, parent, false);
-        return new BindingHolder<>(binding);
+    }
+
+    public static <T extends ViewDataBinding> BindingHolder<T> create(
+            final ViewGroup parent, final @LayoutRes int layoutId) {
+        return new BindingHolder<>(BindingHolder.<T>inflate(parent, layoutId));
     }
 }
