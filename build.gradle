@@ -65,6 +65,7 @@ android {
         String supportLibVersion = '25.1.0'
 
         compile "com.android.support:recyclerview-v7:${supportLibVersion}"
+        compile "com.android.support:design:${supportLibVersion}"
         //TODO remove this once they fix https://code.google.com/p/android/issues/detail?id=229664
         //Explicit dependency on support-v4 to work around dataBinding's old dependency issue
         compile "com.android.support:support-v4:${supportLibVersion}"

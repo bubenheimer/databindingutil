@@ -33,13 +33,12 @@ public class BindingHolder<T extends ViewDataBinding> extends RecyclerView.ViewH
     }
 
     public static <T extends ViewDataBinding> T inflate(
-            final ViewGroup parent, final @LayoutRes int layoutId) {
-        return DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()),
-                layoutId, parent, false);
+            final LayoutInflater inflater, final ViewGroup parent, final @LayoutRes int layoutId) {
+        return DataBindingUtil.inflate(inflater, layoutId, parent, false);
     }
 
     public static <T extends ViewDataBinding> BindingHolder<T> create(
-            final ViewGroup parent, final @LayoutRes int layoutId) {
-        return new BindingHolder<>(BindingHolder.<T>inflate(parent, layoutId));
+            final LayoutInflater inflater, final ViewGroup parent, final @LayoutRes int layoutId) {
+        return new BindingHolder<>(BindingHolder.<T>inflate(inflater, parent, layoutId));
     }
 }
