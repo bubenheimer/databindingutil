@@ -18,24 +18,31 @@ package org.bubenheimer.android.databinding.adapter;
 
 import android.databinding.BindingAdapter;
 import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.BottomNavigationView.OnNavigationItemReselectedListener;
 import android.support.design.widget.BottomNavigationView.OnNavigationItemSelectedListener;
 import android.view.Menu;
 
 import java.util.BitSet;
 
 public final class BottomNavigationViewBindingAdapter {
-    @BindingAdapter(value = "onNavigationItemSelected")
+    @BindingAdapter("onNavigationItemSelected")
     public static void setOnNavigationItemSelectedListener(
             final BottomNavigationView view, final OnNavigationItemSelectedListener listener) {
         view.setOnNavigationItemSelectedListener(listener);
     }
 
-    @BindingAdapter(value = "itemVisibility")
+    @BindingAdapter("onNavigationItemReselected")
+    public static void setOnNavigationItemReselectedListener(
+            final BottomNavigationView view, final OnNavigationItemReselectedListener listener) {
+        view.setOnNavigationItemReselectedListener(listener);
+    }
+
+    @BindingAdapter("itemVisibility")
     public static void setItemVisibility(final BottomNavigationView view, final BitSet bitSet) {
         final Menu menu = view.getMenu();
         final int cnt = menu.size();
         for (int i = 0; i < cnt; ++i) {
-            //TODO replace with setVisible once BottomNavigationView is fixed: https://code.google.com/p/android/issues/detail?id=225838
+            //TODO replace with setVisible once BottomNavigationView is fixed: https://issuetracker.google.com/issues/37124140
             menu.getItem(i).setEnabled(bitSet.get(i));
 //            menu.getItem(i).setVisible(bitSet.get(i));
         }
