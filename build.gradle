@@ -19,7 +19,7 @@ buildscript {
         maven { url MAVEN_REPOSITORY_URL}
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:' + ANDROID_STUDIO_VERSION
+        classpath 'com.android.tools.build:gradle:3.1.0-beta2'
     }
 }
 
@@ -63,13 +63,7 @@ android {
     }
 
     dependencies {
-        //TODO workaround for databinding bug in more recent versions
-        String dataBindingVersion = '3.1.0-alpha9'
-//        String dataBindingVersion = ANDROID_STUDIO_VERSION
         String supportLibVersion = '27.0.2'
-
-        implementation "com.android.databinding:library:${dataBindingVersion}"
-        implementation "com.android.databinding:adapters:${dataBindingVersion}"
 
         implementation "com.android.support:recyclerview-v7:${supportLibVersion}"
         implementation "com.android.support:design:${supportLibVersion}"
