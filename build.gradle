@@ -20,7 +20,8 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.2.0-beta01'
+        classpath 'com.android.tools.build:gradle:3.2.0-beta02'
+        classpath 'com.github.dcendents:android-maven-gradle-plugin:2.1'
     }
 }
 
@@ -30,30 +31,10 @@ repositories {
 }
 
 apply plugin: 'com.android.library'
-apply plugin: 'maven-publish'
+apply plugin: 'com.github.dcendents.android-maven'
 
 group = 'org.bubenheimer'
 version = '1.0-SNAPSHOT'
-
-String supportLibVersion = '28.0.0-alpha1'
-
-publishing {
-    publications {
-        library(MavenPublication) {
-            artifact bundleReleaseAar
-
-            pom.withXml {
-                def deps = asNode().appendNode('dependencies')
-
-                // Give users access to RecyclerView.ViewHolder
-                def recyclerview = deps.appendNode('dependency')
-                recyclerview.appendNode('groupId', 'com.android.support')
-                recyclerview.appendNode('artifactId', 'recyclerview-v7')
-                recyclerview.appendNode('version', supportLibVersion)
-            }
-        }
-    }
-}
 
 android {
     compileSdkVersion 28
@@ -88,9 +69,12 @@ android {
     dataBinding {
         enabled = true
     }
+}
 
-    dependencies {
-        implementation "com.android.support:recyclerview-v7:$supportLibVersion"
-        implementation "com.android.support:design:$supportLibVersion"
-    }
+dependencies {
+    String supportLibVersion = '28.0.0-alpha1'
+
+    // Give users access to RecyclerView.ViewHolder
+    api "com.android.support:recyclerview-v7:$supportLibVersion"
+    implementation "com.android.support:design:$supportLibVersion"
 }
