@@ -16,9 +16,9 @@
 
 package org.bubenheimer.android.databinding.adapter;
 
-import android.databinding.BindingAdapter;
-import android.databinding.adapters.ListenerUtil;
-import android.support.v4.view.ViewPager;
+import androidx.databinding.BindingAdapter;
+import androidx.databinding.adapters.ListenerUtil;
+import androidx.viewpager.widget.ViewPager;
 
 import org.bubenheimer.android.databinding.R;
 

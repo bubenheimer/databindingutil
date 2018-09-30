@@ -16,10 +16,10 @@
 
 package org.bubenheimer.android.databinding.adapter;
 
-import android.databinding.BindingAdapter;
-import android.support.design.widget.BottomNavigationView;
-import android.support.design.widget.BottomNavigationView.OnNavigationItemReselectedListener;
-import android.support.design.widget.BottomNavigationView.OnNavigationItemSelectedListener;
+import androidx.databinding.BindingAdapter;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.bottomnavigation.BottomNavigationView.OnNavigationItemReselectedListener;
+import com.google.android.material.bottomnavigation.BottomNavigationView.OnNavigationItemSelectedListener;
 import android.view.Menu;
 
 import java.util.BitSet;
