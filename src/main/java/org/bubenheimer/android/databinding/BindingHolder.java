@@ -32,6 +32,7 @@ public class BindingHolder<T extends ViewDataBinding> extends RecyclerView.ViewH
         this.binding = binding;
     }
 
+    @SuppressWarnings("TypeParameterUnusedInFormals") // same approach as in DataBindingUtil
     public static <T extends ViewDataBinding> T inflate(
             final LayoutInflater inflater, final ViewGroup parent, final @LayoutRes int layoutId) {
         return DataBindingUtil.inflate(inflater, layoutId, parent, false);
@@ -39,6 +40,6 @@ public class BindingHolder<T extends ViewDataBinding> extends RecyclerView.ViewH
 
     public static <T extends ViewDataBinding> BindingHolder<T> create(
             final LayoutInflater inflater, final ViewGroup parent, final @LayoutRes int layoutId) {
-        return new BindingHolder<>(BindingHolder.<T>inflate(inflater, parent, layoutId));
+        return new BindingHolder<>(BindingHolder.inflate(inflater, parent, layoutId));
     }
 }
