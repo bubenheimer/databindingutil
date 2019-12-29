@@ -68,18 +68,17 @@ android {
         buildConfig false
         dataBinding true
     }
+
+    dependencies {
+        errorprone 'com.google.errorprone:error_prone_core:2.3.4'
+        //noinspection GradleDynamicVersion
+        errorproneJavac 'com.google.errorprone:javac:9+181-r4173-1'
+
+        // Give users access to RecyclerView.ViewHolder
+        api 'androidx.recyclerview:recyclerview:1.1.0'
+        implementation 'com.google.android.material:material:1.0.0'
+    }
 }
-
-dependencies {
-    errorprone 'com.google.errorprone:error_prone_core:2.3.4'
-    //noinspection GradleDynamicVersion
-    errorproneJavac 'com.google.errorprone:javac:9+181-r4173-1'
-
-    // Give users access to RecyclerView.ViewHolder
-    api 'androidx.recyclerview:recyclerview:1.1.0'
-    implementation 'com.google.android.material:material:1.0.0'
-}
-
 
 publishing {
     publications {
