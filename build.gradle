@@ -86,7 +86,7 @@ publishing {
             afterEvaluate {
                 from components.release
             }
-            artifactId = 'databindingutil'
+            artifactId = project.name
         }
     }
 }
