@@ -22,7 +22,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:4.0.0-alpha07'
+        classpath 'com.android.tools.build:gradle:4.0.0-beta03'
         classpath 'net.ltgt.gradle:gradle-errorprone-plugin:1.1.1'
     }
 }
@@ -30,6 +30,7 @@ buildscript {
 repositories {
     google()
     jcenter()
+    mavenLocal()
 }
 
 apply plugin: 'com.android.library'
@@ -74,9 +75,11 @@ android {
         //noinspection GradleDynamicVersion
         errorproneJavac 'com.google.errorprone:javac:9+181-r4173-1'
 
-        // Give users access to RecyclerView.ViewHolder
+        implementation 'org.bubenheimer:javautil:1.0-SNAPSHOT'
+
+        // api to give users access to RecyclerView.ViewHolder
         api 'androidx.recyclerview:recyclerview:1.1.0'
-        implementation 'com.google.android.material:material:1.0.0'
+        implementation 'com.google.android.material:material:1.1.0'
     }
 }
 
