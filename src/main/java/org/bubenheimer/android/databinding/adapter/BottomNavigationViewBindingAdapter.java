@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015-2019 Uli Bubenheimer
+ * Copyright (c) 2015-2020 Uli Bubenheimer
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,35 +17,42 @@
 
 package org.bubenheimer.android.databinding.adapter;
 
-import androidx.databinding.BindingAdapter;
+import android.view.Menu;
+
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.bottomnavigation.BottomNavigationView.OnNavigationItemReselectedListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView.OnNavigationItemSelectedListener;
-import android.view.Menu;
 
 import java.util.BitSet;
+
+import androidx.databinding.BindingAdapter;
 
 public final class BottomNavigationViewBindingAdapter {
     @BindingAdapter("onNavigationItemSelected")
     public static void setOnNavigationItemSelectedListener(
-            final BottomNavigationView view, final OnNavigationItemSelectedListener listener) {
+            final BottomNavigationView view,
+            final OnNavigationItemSelectedListener listener
+    ) {
         view.setOnNavigationItemSelectedListener(listener);
     }
 
     @BindingAdapter("onNavigationItemReselected")
     public static void setOnNavigationItemReselectedListener(
-            final BottomNavigationView view, final OnNavigationItemReselectedListener listener) {
+            final BottomNavigationView view,
+            final OnNavigationItemReselectedListener listener
+    ) {
         view.setOnNavigationItemReselectedListener(listener);
     }
 
     @BindingAdapter("itemVisibility")
-    public static void setItemVisibility(final BottomNavigationView view, final BitSet bitSet) {
+    public static void setItemVisibility(
+            final BottomNavigationView view,
+            final BitSet bitSet
+    ) {
         final Menu menu = view.getMenu();
         final int cnt = menu.size();
         for (int i = 0; i < cnt; ++i) {
-            //TODO replace with setVisible once BottomNavigationView is fixed: https://issuetracker.google.com/issues/37124140
-            menu.getItem(i).setEnabled(bitSet.get(i));
-//            menu.getItem(i).setVisible(bitSet.get(i));
+            menu.getItem(i).setVisible(bitSet.get(i));
         }
     }
 
