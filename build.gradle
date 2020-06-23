@@ -22,7 +22,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:4.1.0-alpha05'
+        classpath 'com.android.tools.build:gradle:4.1.0-beta01'
         classpath 'net.ltgt.gradle:gradle-errorprone-plugin:1.1.1'
     }
 }
@@ -41,10 +41,10 @@ group = 'org.bubenheimer'
 version = '1.0-SNAPSHOT'
 
 android {
-    compileSdkVersion 29
+    compileSdkVersion 30
 
     defaultConfig {
-        targetSdkVersion 29
+        targetSdkVersion 30
         minSdkVersion 14
         versionCode 1
         versionName '1.0'
