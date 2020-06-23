@@ -17,30 +17,41 @@
 
 package org.bubenheimer.android.databinding;
 
-import androidx.databinding.DataBindingUtil;
-import androidx.databinding.ViewDataBinding;
-import androidx.annotation.LayoutRes;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
+import androidx.annotation.LayoutRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.databinding.DataBindingUtil;
+import androidx.databinding.ViewDataBinding;
+import androidx.recyclerview.widget.RecyclerView;
+
 
 public class BindingHolder<T extends ViewDataBinding> extends RecyclerView.ViewHolder {
-    public final T binding;
+    public final @NonNull T binding;
 
-    public BindingHolder(final T binding) {
+    public BindingHolder(
+            final @NonNull T binding
+    ) {
         super(binding.getRoot());
         this.binding = binding;
     }
 
     @SuppressWarnings("TypeParameterUnusedInFormals") // same approach as in DataBindingUtil
     public static <T extends ViewDataBinding> T inflate(
-            final LayoutInflater inflater, final ViewGroup parent, final @LayoutRes int layoutId) {
+            final @NonNull LayoutInflater inflater,
+            final @Nullable ViewGroup parent,
+            final @LayoutRes int layoutId
+    ) {
         return DataBindingUtil.inflate(inflater, layoutId, parent, false);
     }
 
     public static <T extends ViewDataBinding> BindingHolder<T> create(
-            final LayoutInflater inflater, final ViewGroup parent, final @LayoutRes int layoutId) {
-        return new BindingHolder<>(BindingHolder.inflate(inflater, parent, layoutId));
+            final @NonNull LayoutInflater inflater,
+            final @Nullable ViewGroup parent,
+            final @LayoutRes int layoutId
+    ) {
+        return new BindingHolder<>(inflate(inflater, parent, layoutId));
     }
 }
