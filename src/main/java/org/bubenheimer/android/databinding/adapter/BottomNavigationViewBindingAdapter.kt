@@ -14,49 +14,34 @@
  * limitations under the License.
  *
  */
+package org.bubenheimer.android.databinding.adapter
 
-package org.bubenheimer.android.databinding.adapter;
+import androidx.databinding.BindingAdapter
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.bottomnavigation.BottomNavigationView.OnNavigationItemReselectedListener
+import java.util.*
 
-import android.view.Menu;
+class BottomNavigationViewBindingAdapter private constructor() {
+    companion object {
+        @BindingAdapter("onNavigationItemSelected")
+        fun setOnNavigationItemSelectedListener(
+                view: BottomNavigationView,
+                listener: BottomNavigationView.OnNavigationItemSelectedListener?
+        ) = view.setOnNavigationItemSelectedListener(listener)
 
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.bottomnavigation.BottomNavigationView.OnNavigationItemReselectedListener;
-import com.google.android.material.bottomnavigation.BottomNavigationView.OnNavigationItemSelectedListener;
+        @BindingAdapter("onNavigationItemReselected")
+        fun setOnNavigationItemReselectedListener(
+                view: BottomNavigationView,
+                listener: OnNavigationItemReselectedListener?
+        ) = view.setOnNavigationItemReselectedListener(listener)
 
-import java.util.BitSet;
-
-import androidx.databinding.BindingAdapter;
-
-public final class BottomNavigationViewBindingAdapter {
-    @BindingAdapter("onNavigationItemSelected")
-    public static void setOnNavigationItemSelectedListener(
-            final BottomNavigationView view,
-            final OnNavigationItemSelectedListener listener
-    ) {
-        view.setOnNavigationItemSelectedListener(listener);
-    }
-
-    @BindingAdapter("onNavigationItemReselected")
-    public static void setOnNavigationItemReselectedListener(
-            final BottomNavigationView view,
-            final OnNavigationItemReselectedListener listener
-    ) {
-        view.setOnNavigationItemReselectedListener(listener);
-    }
-
-    @BindingAdapter("itemVisibility")
-    public static void setItemVisibility(
-            final BottomNavigationView view,
-            final BitSet bitSet
-    ) {
-        final Menu menu = view.getMenu();
-        final int cnt = menu.size();
-        for (int i = 0; i < cnt; ++i) {
-            menu.getItem(i).setVisible(bitSet.get(i));
+        @BindingAdapter("itemVisibility")
+        fun setItemVisibility(view: BottomNavigationView, bitSet: BitSet) {
+            val menu = view.menu
+            val cnt = menu.size()
+            for (i in 0 until cnt) {
+                menu.getItem(i).isVisible = bitSet[i]
+            }
         }
-    }
-
-    private BottomNavigationViewBindingAdapter() {
-        throw new UnsupportedOperationException();
     }
 }

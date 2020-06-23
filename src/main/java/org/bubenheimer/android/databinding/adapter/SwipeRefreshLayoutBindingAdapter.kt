@@ -14,22 +14,17 @@
  * limitations under the License.
  *
  */
+package org.bubenheimer.android.databinding.adapter
 
-package org.bubenheimer.android.databinding.adapter;
+import androidx.databinding.BindingAdapter
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout.OnRefreshListener
 
-import androidx.databinding.BindingAdapter;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-
-public final class SwipeRefreshLayoutBindingAdapter {
-    @BindingAdapter("onRefresh")
-    public static void setOnRefreshListener(
-            final SwipeRefreshLayout view,
-            final SwipeRefreshLayout.OnRefreshListener listener
-    ) {
-        view.setOnRefreshListener(listener);
-    }
-
-    private SwipeRefreshLayoutBindingAdapter() {
-        throw new UnsupportedOperationException();
+class SwipeRefreshLayoutBindingAdapter private constructor() {
+    companion object {
+        @BindingAdapter("onRefresh")
+        fun setOnRefreshListener(view: SwipeRefreshLayout, listener: OnRefreshListener?) {
+            view.setOnRefreshListener(listener)
+        }
     }
 }

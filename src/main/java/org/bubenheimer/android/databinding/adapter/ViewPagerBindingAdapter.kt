@@ -14,72 +14,67 @@
  * limitations under the License.
  *
  */
+package org.bubenheimer.android.databinding.adapter
 
-package org.bubenheimer.android.databinding.adapter;
+import androidx.databinding.BindingAdapter
+import androidx.databinding.adapters.ListenerUtil
+import androidx.viewpager.widget.ViewPager
+import androidx.viewpager.widget.ViewPager.OnPageChangeListener
+import org.bubenheimer.android.databinding.R
 
-import androidx.databinding.BindingAdapter;
-import androidx.databinding.adapters.ListenerUtil;
-import androidx.viewpager.widget.ViewPager;
-
-import org.bubenheimer.android.databinding.R;
-
-public final class ViewPagerBindingAdapter {
-    @BindingAdapter(requireAll = false,
-            value = {"onPageScrollStateChanged", "onPageScrolled", "onPageSelected"})
-    public static void setOnPageChangeListener(
-            final ViewPager view, final OnPageScrollStateChanged scrollState,
-            final OnPageScrolled scrolled, final OnPageSelected selected) {
-        final ViewPager.OnPageChangeListener newValue;
-        if (scrollState == null && scrolled == null && selected == null) {
-            newValue = null;
-        } else {
-            newValue = new ViewPager.OnPageChangeListener() {
-                @Override
-                public void onPageScrolled(final int position, final float positionOffset,
-                                           final int positionOffsetPixels) {
-                    if (scrolled != null) {
-                        scrolled.onPageScrolled(position, positionOffset, positionOffsetPixels);
-                    }
+class ViewPagerBindingAdapter private constructor() {
+    companion object {
+        @BindingAdapter(requireAll = false, value = [
+            "onPageScrollStateChanged",
+            "onPageScrolled",
+            "onPageSelected"
+        ])
+        fun setOnPageChangeListener(
+                view: ViewPager,
+                scrollState: OnPageScrollStateChanged?,
+                scrolled: OnPageScrolled?,
+                selected: OnPageSelected?
+        ) {
+            val newValue = if (scrollState == null && scrolled == null && selected == null) null
+            else object : OnPageChangeListener {
+                override fun onPageScrolled(
+                        position: Int,
+                        positionOffset: Float,
+                        positionOffsetPixels: Int
+                ) {
+                    scrolled?.onPageScrolled(position, positionOffset, positionOffsetPixels)
                 }
 
-                @Override
-                public void onPageSelected(final int position) {
-                    if (selected != null) {
-                        selected.onPageSelected(position);
-                    }
+                override fun onPageSelected(position: Int) {
+                    selected?.onPageSelected(position)
                 }
 
-                @Override
-                public void onPageScrollStateChanged(final int state) {
-                    if (scrollState != null) {
-                        scrollState.onPageScrollStateChanged(state);
-                    }
+                override fun onPageScrollStateChanged(state: Int) {
+                    scrollState?.onPageScrollStateChanged(state)
                 }
-            };
+            }
+
+            val oldValue =
+                    ListenerUtil.trackListener(view, newValue, R.id.tag_viewpagerbindingadapter)
+            if (oldValue != null) {
+                view.removeOnPageChangeListener(oldValue)
+            }
+
+            if (newValue != null) {
+                view.addOnPageChangeListener(newValue)
+            }
         }
-        final ViewPager.OnPageChangeListener oldValue =
-                ListenerUtil.trackListener(view, newValue, R.id.tag_viewpagerbindingadapter);
-        if (oldValue != null) {
-            view.removeOnPageChangeListener(oldValue);
-        }
-        if (newValue != null) {
-            view.addOnPageChangeListener(newValue);
-        }
     }
 
-    public interface OnPageScrollStateChanged {
-        void onPageScrollStateChanged(int state);
+    interface OnPageScrollStateChanged {
+        fun onPageScrollStateChanged(state: Int)
     }
 
-    public interface OnPageScrolled {
-        void onPageScrolled(int position, float positionOffset, int positionOffsetPixels);
+    interface OnPageScrolled {
+        fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int)
     }
 
-    public interface OnPageSelected {
-        void onPageSelected(int position);
-    }
-
-    private ViewPagerBindingAdapter() {
-        throw new UnsupportedOperationException();
+    interface OnPageSelected {
+        fun onPageSelected(position: Int)
     }
 }

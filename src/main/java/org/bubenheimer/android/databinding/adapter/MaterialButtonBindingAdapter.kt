@@ -14,60 +14,38 @@
  * limitations under the License.
  *
  */
+package org.bubenheimer.android.databinding.adapter
 
-package org.bubenheimer.android.databinding.adapter;
+import androidx.databinding.BindingAdapter
+import androidx.databinding.InverseBindingListener
+import androidx.databinding.InverseBindingMethod
+import androidx.databinding.InverseBindingMethods
+import com.google.android.material.button.MaterialButton
 
-import com.google.android.material.button.MaterialButton;
-
-import org.bubenheimer.android.databinding.Check;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.databinding.BindingAdapter;
-import androidx.databinding.InverseBindingListener;
-import androidx.databinding.InverseBindingMethod;
-import androidx.databinding.InverseBindingMethods;
-
-@InverseBindingMethods({
-        @InverseBindingMethod(
-                type = MaterialButton.class,
-                attribute = "checked"
-        )
-})
-public final class MaterialButtonBindingAdapter {
-    @BindingAdapter("checked")
-    public static void setChecked(
-            final @NonNull MaterialButton view,
-            final boolean checked
-    ) {
-        if (view.isChecked() != checked) {
-            view.setChecked(checked);
+@InverseBindingMethods(InverseBindingMethod(type = MaterialButton::class, attribute = "checked"))
+class MaterialButtonBindingAdapter private constructor() {
+    companion object {
+        @BindingAdapter("checked")
+        fun setChecked(view: MaterialButton, checked: Boolean) {
+            if (view.isChecked != checked) {
+                view.isChecked = checked
+            }
         }
-    }
 
-    @BindingAdapter(
-            value =  {"onCheckedChanged", "checkedAttrChanged"},
-            requireAll = false
-    )
-    public static void setListeners(
-            final @NonNull MaterialButton view,
-            final @Nullable MaterialButton.OnCheckedChangeListener listener,
-            final @Nullable InverseBindingListener attrChange
-    ) {
-        if (attrChange == null) {
-            Check.notNull(listener);
-            view.addOnCheckedChangeListener(listener);
-        } else {
-            view.addOnCheckedChangeListener((buttonView, isChecked) -> {
-                if (listener != null) {
-                    listener.onCheckedChanged(buttonView, isChecked);
+        @BindingAdapter(value = ["onCheckedChanged", "checkedAttrChanged"], requireAll = false)
+        fun setListeners(
+                view: MaterialButton,
+                listener: MaterialButton.OnCheckedChangeListener?,
+                attrChange: InverseBindingListener?
+        ) {
+            if (attrChange == null) {
+                view.addOnCheckedChangeListener(listener!!)
+            } else {
+                view.addOnCheckedChangeListener { buttonView: MaterialButton, isChecked: Boolean ->
+                    listener?.onCheckedChanged(buttonView, isChecked)
+                    attrChange.onChange()
                 }
-                attrChange.onChange();
-            });
+            }
         }
-    }
-
-    private MaterialButtonBindingAdapter() {
-        throw new UnsupportedOperationException();
     }
 }

@@ -14,44 +14,29 @@
  * limitations under the License.
  *
  */
+package org.bubenheimer.android.databinding
 
-package org.bubenheimer.android.databinding;
+import android.view.LayoutInflater
+import android.view.ViewGroup
+import androidx.annotation.LayoutRes
+import androidx.databinding.DataBindingUtil
+import androidx.databinding.ViewDataBinding
+import androidx.recyclerview.widget.RecyclerView
 
-import android.view.LayoutInflater;
-import android.view.ViewGroup;
+open class BindingHolder<T : ViewDataBinding>(val binding: T) :
+        RecyclerView.ViewHolder(binding.root) {
+    companion object {
+        // same approach as in DataBindingUtil
+        fun <T : ViewDataBinding> inflate(
+                inflater: LayoutInflater,
+                parent: ViewGroup?,
+                @LayoutRes layoutId: Int
+        ): T = DataBindingUtil.inflate(inflater, layoutId, parent, false)
 
-import androidx.annotation.LayoutRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.databinding.DataBindingUtil;
-import androidx.databinding.ViewDataBinding;
-import androidx.recyclerview.widget.RecyclerView;
-
-
-public class BindingHolder<T extends ViewDataBinding> extends RecyclerView.ViewHolder {
-    public final @NonNull T binding;
-
-    public BindingHolder(
-            final @NonNull T binding
-    ) {
-        super(binding.getRoot());
-        this.binding = binding;
-    }
-
-    @SuppressWarnings("TypeParameterUnusedInFormals") // same approach as in DataBindingUtil
-    public static <T extends ViewDataBinding> T inflate(
-            final @NonNull LayoutInflater inflater,
-            final @Nullable ViewGroup parent,
-            final @LayoutRes int layoutId
-    ) {
-        return DataBindingUtil.inflate(inflater, layoutId, parent, false);
-    }
-
-    public static <T extends ViewDataBinding> BindingHolder<T> create(
-            final @NonNull LayoutInflater inflater,
-            final @Nullable ViewGroup parent,
-            final @LayoutRes int layoutId
-    ) {
-        return new BindingHolder<>(inflate(inflater, parent, layoutId));
+        fun <T : ViewDataBinding> create(
+                inflater: LayoutInflater,
+                parent: ViewGroup?,
+                @LayoutRes layoutId: Int
+        ): BindingHolder<T> = BindingHolder(inflate(inflater, parent, layoutId))
     }
 }
