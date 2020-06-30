@@ -24,9 +24,8 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:4.1.0-beta01'
+        classpath 'com.android.tools.build:gradle:4.1.0-beta02'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-        classpath 'net.ltgt.gradle:gradle-errorprone-plugin:1.1.1'
     }
 }
 
@@ -40,7 +39,6 @@ apply plugin: 'com.android.library'
 apply plugin: 'maven-publish'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
-apply plugin: 'net.ltgt.errorprone'
 
 group = 'org.bubenheimer'
 version = '1.0-SNAPSHOT'
@@ -72,10 +70,6 @@ android {
     }
 
     dependencies {
-        errorprone 'com.google.errorprone:error_prone_core:2.3.4'
-        //noinspection GradleDynamicVersion
-        errorproneJavac 'com.google.errorprone:javac:9+181-r4173-1'
-
         implementation 'org.bubenheimer:androidutil:1.0-SNAPSHOT'
         implementation 'org.bubenheimer:javautil:1.0-SNAPSHOT'
 
@@ -83,9 +77,9 @@ android {
         api 'androidx.recyclerview:recyclerview:1.1.0'
         implementation 'com.google.android.material:material:1.1.0'
 
-        implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0-rc01'
+        implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
 
-        implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+        implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     }
 }
 
