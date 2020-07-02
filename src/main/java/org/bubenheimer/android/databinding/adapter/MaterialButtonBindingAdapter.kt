@@ -23,28 +23,28 @@ import androidx.databinding.InverseBindingMethods
 import com.google.android.material.button.MaterialButton
 
 @InverseBindingMethods(InverseBindingMethod(type = MaterialButton::class, attribute = "checked"))
-class MaterialButtonBindingAdapter private constructor() {
-    companion object {
-        @BindingAdapter("checked")
-        fun setChecked(view: MaterialButton, checked: Boolean) {
-            if (view.isChecked != checked) {
-                view.isChecked = checked
-            }
+object MaterialButtonBindingAdapter {
+    @BindingAdapter("checked")
+    @JvmStatic
+    fun setChecked(view: MaterialButton, checked: Boolean) {
+        if (view.isChecked != checked) {
+            view.isChecked = checked
         }
+    }
 
-        @BindingAdapter(value = ["onCheckedChanged", "checkedAttrChanged"], requireAll = false)
-        fun setListeners(
-                view: MaterialButton,
-                listener: MaterialButton.OnCheckedChangeListener?,
-                attrChange: InverseBindingListener?
-        ) {
-            if (attrChange == null) {
-                view.addOnCheckedChangeListener(listener!!)
-            } else {
-                view.addOnCheckedChangeListener { buttonView: MaterialButton, isChecked: Boolean ->
-                    listener?.onCheckedChanged(buttonView, isChecked)
-                    attrChange.onChange()
-                }
+    @BindingAdapter(value = ["onCheckedChanged", "checkedAttrChanged"], requireAll = false)
+    @JvmStatic
+    fun setListeners(
+        view: MaterialButton,
+        listener: MaterialButton.OnCheckedChangeListener?,
+        attrChange: InverseBindingListener?
+    ) {
+        if (attrChange == null) {
+            view.addOnCheckedChangeListener(listener!!)
+        } else {
+            view.addOnCheckedChangeListener { buttonView: MaterialButton, isChecked: Boolean ->
+                listener?.onCheckedChanged(buttonView, isChecked)
+                attrChange.onChange()
             }
         }
     }

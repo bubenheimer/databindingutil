@@ -21,27 +21,28 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.bottomnavigation.BottomNavigationView.OnNavigationItemReselectedListener
 import java.util.*
 
-class BottomNavigationViewBindingAdapter private constructor() {
-    companion object {
-        @BindingAdapter("onNavigationItemSelected")
-        fun setOnNavigationItemSelectedListener(
-                view: BottomNavigationView,
-                listener: BottomNavigationView.OnNavigationItemSelectedListener?
-        ) = view.setOnNavigationItemSelectedListener(listener)
+object BottomNavigationViewBindingAdapter {
+    @BindingAdapter("onNavigationItemSelected")
+    @JvmStatic
+    fun setOnNavigationItemSelectedListener(
+        view: BottomNavigationView,
+        listener: BottomNavigationView.OnNavigationItemSelectedListener?
+    ) = view.setOnNavigationItemSelectedListener(listener)
 
-        @BindingAdapter("onNavigationItemReselected")
-        fun setOnNavigationItemReselectedListener(
-                view: BottomNavigationView,
-                listener: OnNavigationItemReselectedListener?
-        ) = view.setOnNavigationItemReselectedListener(listener)
+    @BindingAdapter("onNavigationItemReselected")
+    @JvmStatic
+    fun setOnNavigationItemReselectedListener(
+        view: BottomNavigationView,
+        listener: OnNavigationItemReselectedListener?
+    ) = view.setOnNavigationItemReselectedListener(listener)
 
-        @BindingAdapter("itemVisibility")
-        fun setItemVisibility(view: BottomNavigationView, bitSet: BitSet) {
-            val menu = view.menu
-            val cnt = menu.size()
-            for (i in 0 until cnt) {
-                menu.getItem(i).isVisible = bitSet[i]
-            }
+    @BindingAdapter("itemVisibility")
+    @JvmStatic
+    fun setItemVisibility(view: BottomNavigationView, bitSet: BitSet) {
+        val menu = view.menu
+        val cnt = menu.size()
+        for (i in 0 until cnt) {
+            menu.getItem(i).isVisible = bitSet[i]
         }
     }
 }

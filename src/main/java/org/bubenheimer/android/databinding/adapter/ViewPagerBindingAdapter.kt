@@ -22,59 +22,60 @@ import androidx.viewpager.widget.ViewPager
 import androidx.viewpager.widget.ViewPager.OnPageChangeListener
 import org.bubenheimer.android.databinding.R
 
-class ViewPagerBindingAdapter private constructor() {
-    companion object {
-        @BindingAdapter(requireAll = false, value = [
+interface OnPageScrollStateChanged {
+    fun onPageScrollStateChanged(state: Int)
+}
+
+interface OnPageScrolled {
+    fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int)
+}
+
+interface OnPageSelected {
+    fun onPageSelected(position: Int)
+}
+
+object ViewPagerBindingAdapter {
+    @BindingAdapter(
+        requireAll = false, value = [
             "onPageScrollStateChanged",
             "onPageScrolled",
             "onPageSelected"
-        ])
-        fun setOnPageChangeListener(
-                view: ViewPager,
-                scrollState: OnPageScrollStateChanged?,
-                scrolled: OnPageScrolled?,
-                selected: OnPageSelected?
-        ) {
-            val newValue = if (scrollState == null && scrolled == null && selected == null) null
-            else object : OnPageChangeListener {
-                override fun onPageScrolled(
-                        position: Int,
-                        positionOffset: Float,
-                        positionOffsetPixels: Int
-                ) {
-                    scrolled?.onPageScrolled(position, positionOffset, positionOffsetPixels)
-                }
-
-                override fun onPageSelected(position: Int) {
-                    selected?.onPageSelected(position)
-                }
-
-                override fun onPageScrollStateChanged(state: Int) {
-                    scrollState?.onPageScrollStateChanged(state)
-                }
+        ]
+    )
+    @JvmStatic
+    fun setOnPageChangeListener(
+        view: ViewPager,
+        scrollState: OnPageScrollStateChanged?,
+        scrolled: OnPageScrolled?,
+        selected: OnPageSelected?
+    ) {
+        val newValue = if (scrollState == null && scrolled == null && selected == null) null
+        else object : OnPageChangeListener {
+            override fun onPageScrolled(
+                position: Int,
+                positionOffset: Float,
+                positionOffsetPixels: Int
+            ) {
+                scrolled?.onPageScrolled(position, positionOffset, positionOffsetPixels)
             }
 
-            val oldValue =
-                    ListenerUtil.trackListener(view, newValue, R.id.tag_viewpagerbindingadapter)
-            if (oldValue != null) {
-                view.removeOnPageChangeListener(oldValue)
+            override fun onPageSelected(position: Int) {
+                selected?.onPageSelected(position)
             }
 
-            if (newValue != null) {
-                view.addOnPageChangeListener(newValue)
+            override fun onPageScrollStateChanged(state: Int) {
+                scrollState?.onPageScrollStateChanged(state)
             }
         }
-    }
 
-    interface OnPageScrollStateChanged {
-        fun onPageScrollStateChanged(state: Int)
-    }
+        val oldValue =
+            ListenerUtil.trackListener(view, newValue, R.id.tag_viewpagerbindingadapter)
+        if (oldValue != null) {
+            view.removeOnPageChangeListener(oldValue)
+        }
 
-    interface OnPageScrolled {
-        fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int)
-    }
-
-    interface OnPageSelected {
-        fun onPageSelected(position: Int)
+        if (newValue != null) {
+            view.addOnPageChangeListener(newValue)
+        }
     }
 }
