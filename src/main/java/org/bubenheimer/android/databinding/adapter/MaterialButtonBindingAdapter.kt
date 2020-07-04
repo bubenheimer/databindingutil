@@ -32,7 +32,12 @@ object MaterialButtonBindingAdapter {
         }
     }
 
-    @BindingAdapter(value = ["onCheckedChanged", "checkedAttrChanged"], requireAll = false)
+    @BindingAdapter(
+        requireAll = false, value = [
+            "onCheckedChanged",
+            "checkedAttrChanged"
+        ]
+    )
     @JvmStatic
     fun setListeners(
         view: MaterialButton,
