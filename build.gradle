@@ -24,7 +24,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:4.1.0-beta03'
+        classpath 'com.android.tools.build:gradle:4.1.0-beta05'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
@@ -70,7 +70,9 @@ android {
     }
 
     dependencies {
-        implementation 'org.bubenheimer:androidutil:1.0-SNAPSHOT'
+        debugImplementation 'org.bubenheimer:androidutil-debug:1.0-SNAPSHOT'
+        releaseImplementation 'org.bubenheimer:androidutil-release:1.0-SNAPSHOT'
+
         implementation 'org.bubenheimer:javautil:1.0-SNAPSHOT'
 
         // api to give users access to RecyclerView.ViewHolder
@@ -86,11 +88,18 @@ android {
 
 publishing {
     publications {
+        debug(MavenPublication) {
+            afterEvaluate {
+                from components.debug
+            }
+            artifactId = "$project.name-debug"
+        }
+
         release(MavenPublication) {
             afterEvaluate {
                 from components.release
             }
-            artifactId = project.name
+            artifactId = "$project.name-release"
         }
     }
 }
