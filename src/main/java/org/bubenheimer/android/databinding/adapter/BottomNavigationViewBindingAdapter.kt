@@ -21,24 +21,24 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.bottomnavigation.BottomNavigationView.OnNavigationItemReselectedListener
 import java.util.*
 
-object BottomNavigationViewBindingAdapter {
+public object BottomNavigationViewBindingAdapter {
     @BindingAdapter("onNavigationItemSelected")
     @JvmStatic
-    fun setOnNavigationItemSelectedListener(
+    public fun setOnNavigationItemSelectedListener(
         view: BottomNavigationView,
         listener: BottomNavigationView.OnNavigationItemSelectedListener?
-    ) = view.setOnNavigationItemSelectedListener(listener)
+    ): Unit = view.setOnNavigationItemSelectedListener(listener)
 
     @BindingAdapter("onNavigationItemReselected")
     @JvmStatic
-    fun setOnNavigationItemReselectedListener(
+    public fun setOnNavigationItemReselectedListener(
         view: BottomNavigationView,
         listener: OnNavigationItemReselectedListener?
-    ) = view.setOnNavigationItemReselectedListener(listener)
+    ): Unit = view.setOnNavigationItemReselectedListener(listener)
 
     @BindingAdapter("itemVisibility")
     @JvmStatic
-    fun setItemVisibility(view: BottomNavigationView, bitSet: BitSet) {
+    public fun setItemVisibility(view: BottomNavigationView, bitSet: BitSet) {
         val menu = view.menu
         val cnt = menu.size()
         for (i in 0 until cnt) {

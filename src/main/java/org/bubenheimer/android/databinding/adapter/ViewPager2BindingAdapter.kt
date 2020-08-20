@@ -25,23 +25,23 @@ import androidx.databinding.adapters.ListenerUtil
 import androidx.viewpager2.widget.ViewPager2
 import org.bubenheimer.android.databinding.R
 
-interface OnPageScrollStateChanged {
-    fun onPageScrollStateChanged(state: Int)
+public interface OnPageScrollStateChanged {
+    public fun onPageScrollStateChanged(state: Int)
 }
 
-interface OnPageScrolled {
-    fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int)
+public interface OnPageScrolled {
+    public fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int)
 }
 
-interface OnPageSelected {
-    fun onPageSelected(position: Int)
+public interface OnPageSelected {
+    public fun onPageSelected(position: Int)
 }
 
 @InverseBindingMethods(InverseBindingMethod(type = ViewPager2::class, attribute = "currentItem"))
-object ViewPager2BindingAdapter {
+public object ViewPager2BindingAdapter {
     @BindingAdapter("currentItem")
     @JvmStatic
-    fun setCurrentItem(view: ViewPager2, currentItem: Int) {
+    public fun setCurrentItem(view: ViewPager2, currentItem: Int) {
         if (view.currentItem != currentItem) {
             view.currentItem = currentItem
         }
@@ -56,7 +56,7 @@ object ViewPager2BindingAdapter {
         ]
     )
     @JvmStatic
-    fun registerOnPageChangeCallback(
+    public fun registerOnPageChangeCallback(
         view: ViewPager2,
         scrollState: OnPageScrollStateChanged?,
         scrolled: OnPageScrolled?,

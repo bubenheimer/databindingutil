@@ -20,10 +20,10 @@ import android.os.Build
 import android.widget.ProgressBar
 import androidx.databinding.BindingAdapter
 
-object ProgressBarBindingAdapter {
+public object ProgressBarBindingAdapter {
     @BindingAdapter("animatedProgress")
     @JvmStatic
-    fun setAnimatedProgress(view: ProgressBar, progress: Int) {
+    public fun setAnimatedProgress(view: ProgressBar, progress: Int) {
         view.let {
             if (Build.VERSION_CODES.N <= Build.VERSION.SDK_INT) {
                 it.setProgress(progress, true)

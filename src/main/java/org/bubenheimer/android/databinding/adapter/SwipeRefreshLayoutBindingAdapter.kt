@@ -20,10 +20,10 @@ import androidx.databinding.BindingAdapter
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout.OnRefreshListener
 
-object SwipeRefreshLayoutBindingAdapter {
+public object SwipeRefreshLayoutBindingAdapter {
     @BindingAdapter("onRefresh")
     @JvmStatic
-    fun setOnRefreshListener(view: SwipeRefreshLayout, listener: OnRefreshListener?) {
+    public fun setOnRefreshListener(view: SwipeRefreshLayout, listener: OnRefreshListener?) {
         view.setOnRefreshListener(listener)
     }
 }

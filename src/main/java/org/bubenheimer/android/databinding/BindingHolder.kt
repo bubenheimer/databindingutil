@@ -23,20 +23,20 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
 
-open class BindingHolder<T : ViewDataBinding>(val binding: T) :
-        RecyclerView.ViewHolder(binding.root) {
-    companion object {
+public open class BindingHolder<T : ViewDataBinding>(public val binding: T) :
+    RecyclerView.ViewHolder(binding.root) {
+    public companion object {
         // same approach as in DataBindingUtil
-        fun <T : ViewDataBinding> inflate(
-                inflater: LayoutInflater,
-                parent: ViewGroup?,
-                @LayoutRes layoutId: Int
+        public fun <T : ViewDataBinding> inflate(
+            inflater: LayoutInflater,
+            parent: ViewGroup?,
+            @LayoutRes layoutId: Int
         ): T = DataBindingUtil.inflate(inflater, layoutId, parent, false)
 
-        fun <T : ViewDataBinding> create(
-                inflater: LayoutInflater,
-                parent: ViewGroup?,
-                @LayoutRes layoutId: Int
+        public fun <T : ViewDataBinding> create(
+            inflater: LayoutInflater,
+            parent: ViewGroup?,
+            @LayoutRes layoutId: Int
         ): BindingHolder<T> = BindingHolder(inflate(inflater, parent, layoutId))
     }
 }

@@ -23,10 +23,10 @@ import androidx.databinding.InverseBindingMethods
 import com.google.android.material.button.MaterialButton
 
 @InverseBindingMethods(InverseBindingMethod(type = MaterialButton::class, attribute = "checked"))
-object MaterialButtonBindingAdapter {
+public object MaterialButtonBindingAdapter {
     @BindingAdapter("checked")
     @JvmStatic
-    fun setChecked(view: MaterialButton, checked: Boolean) {
+    public fun setChecked(view: MaterialButton, checked: Boolean) {
         if (view.isChecked != checked) {
             view.isChecked = checked
         }
@@ -39,7 +39,7 @@ object MaterialButtonBindingAdapter {
         ]
     )
     @JvmStatic
-    fun setListeners(
+    public fun setListeners(
         view: MaterialButton,
         listener: MaterialButton.OnCheckedChangeListener?,
         attrChange: InverseBindingListener?
