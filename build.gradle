@@ -16,7 +16,7 @@
  */
 
 buildscript {
-    ext.kotlin_version = '1.4.0'
+    ext.kotlin_version = '1.4.10'
 
     repositories {
         google()
@@ -24,7 +24,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:4.1.0-rc02'
+        classpath 'com.android.tools.build:gradle:4.1.0-rc03'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
@@ -80,8 +80,6 @@ android {
     dependencies {
         debugImplementation 'org.bubenheimer:androidutil-debug:1.0-SNAPSHOT'
         releaseImplementation 'org.bubenheimer:androidutil-release:1.0-SNAPSHOT'
-
-        implementation 'org.bubenheimer:javautil:1.0-SNAPSHOT'
 
         // api to give users access to RecyclerView.ViewHolder
         api 'androidx.recyclerview:recyclerview:1.1.0'
