@@ -16,7 +16,10 @@
  */
 
 buildscript {
-    ext.kotlin_version = '1.4.20'
+    ext {
+        kotlin_version = '1.4.21'
+        java_version = '1.8'
+    }
 
     repositories {
         google()
@@ -64,8 +67,13 @@ android {
         }
     }
 
+    compileOptions {
+        sourceCompatibility java_version
+        targetCompatibility java_version
+    }
+
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = java_version
         freeCompilerArgs = [
                 "-progressive",
                 "-Xexplicit-api=strict",
@@ -88,8 +96,6 @@ android {
 
         implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
         implementation 'androidx.viewpager2:viewpager2:1.0.0'
-
-        implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     }
 
     task debugSourceJar(type: Jar) {
