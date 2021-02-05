@@ -74,6 +74,7 @@ android {
 
     kotlinOptions {
         jvmTarget = java_version
+        useIR = true
         freeCompilerArgs = [
                 "-progressive",
                 "-Xexplicit-api=strict",
