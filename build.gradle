@@ -18,7 +18,7 @@
 buildscript {
     ext {
         kotlin_version = '1.5.21'
-        java_version = '1.8'
+        java_version = '11'
     }
 
     repositories {
